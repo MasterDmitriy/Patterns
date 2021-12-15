@@ -17,7 +17,7 @@ namespace DAL.EntityFramework
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySql("server=127.0.0.1;user=root;password=Killer916$;database=sportDb;");
+            optionsBuilder.UseMySql("server=127.0.0.1;user=root;password=RzbdWdd8m6;database=sportDb;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
