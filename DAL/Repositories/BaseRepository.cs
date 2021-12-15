@@ -32,7 +32,9 @@ namespace DAL.Repositories
 
         public virtual TEntity GetById(int id)
         {
-            return _entities.Find(id);
+            var entity = _entities.Find(id);
+            _dbContext.ChangeTracker.Entries().ToList().ForEach(x => x.State = EntityState.Detached);
+            return entity;
         }
 
         public virtual IEnumerable<TEntity> GetAll(params Expression<Func<TEntity, object>>[] includeProperties)
@@ -45,6 +47,8 @@ namespace DAL.Repositories
             _dbContext.Entry(entity).State = EntityState.Modified;
 
             _dbContext.SaveChanges();
+
+            _dbContext.ChangeTracker.Entries().ToList().ForEach(x => x.State = EntityState.Detached);
         }
 
         public virtual void DeleteById(int id)

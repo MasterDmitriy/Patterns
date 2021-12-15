@@ -5,6 +5,7 @@ using DAL.Models;
 using Newtonsoft.Json;
 using Patterns.Builders;
 using Patterns.Factories;
+using Patterns.Memento;
 using Patterns.Services;
 
 namespace Patterns
@@ -19,13 +20,27 @@ namespace Patterns
                 ReferenceLoopHandling = ReferenceLoopHandling.Ignore
             };
 
-            var service = new CommonService<Category>();
+            var factory = new RepositoryFactory();
+            var categoryRepository = factory.CategoryRepository;
+            var memento = categoryRepository.GetById(2);
+            var originator = new Originator(memento);
+            var caretaker = new CategoryCaretaker(originator, factory);
+            caretaker.Backup();
+
+            originator.Update("[memento] updated category name 11");
+            caretaker.Backup();
+
+            originator.Update("[memento] updated category name 12");
+            caretaker.Undo();
+            caretaker.Undo();
+
+            /*var service = new CommonService<Category>();
             var category = service.Add(new Category {Name = "category name1"});
 
             category.Name = "updated category name";
             service.Update(category);
 
-            service.Delete(category.Id);
+            service.Delete(category.Id);*/
 
             /*var factory = new RepositoryFactory();
 
