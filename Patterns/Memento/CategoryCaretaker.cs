@@ -9,8 +9,8 @@ namespace Patterns.Memento
 {
     public class CategoryCaretaker
     {
-        private List<Category> _mementos = new();
-        private Originator _originator = null;
+        private readonly List<Category> _mementos = new();
+        private readonly Originator _originator;
 
         private readonly IRepository<Category> _repository;
 

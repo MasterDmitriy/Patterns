@@ -9,7 +9,7 @@ namespace Patterns.Memento
 
         public Originator(Category category)
         {
-            _category = category;// new Category { Id = category.Id, Name = category.Name };
+            _category = new Category { Id = category.Id, Name = category.Name };
         }
 
         public Category Save()
