@@ -13,6 +13,7 @@ namespace DAL.EntityFramework
         public SportEquipmentContext(DbContextOptions<SportEquipmentContext> options)
             : base(options)
         {
+            Database.EnsureCreated();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -39,6 +40,12 @@ namespace DAL.EntityFramework
                 .HasOne(brand => brand.BrandType)
                 .WithMany(brandType => brandType.Brands)
                 .HasForeignKey(brand => brand.BrandTypeId);
+
+            modelBuilder
+                .Entity<User>()
+                .HasOne(user => user.Role)
+                .WithMany(role => role.Users)
+                .HasForeignKey(user => user.RoleId);
         }
     }
 }
