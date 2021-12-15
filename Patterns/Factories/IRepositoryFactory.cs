@@ -5,12 +5,12 @@ namespace Patterns.Factories
 {
     public interface IRepositoryFactory
     {
-        IRepository<Brand> BrandRepository => new BaseRepository<Brand>();
+        IRepository<Brand> BrandRepository { get; }
 
-        IRepository<BrandType> BrandTypeRepository => new BaseRepository<BrandType>();
+        IRepository<BrandType> BrandTypeRepository { get; }
 
-        IRepository<Category> CategoryRepository => new BaseRepository<Category>();
+        IRepository<Category> CategoryRepository { get; }
 
-        IRepository<Product> ProductRepository => new BaseRepository<Product>();
+        IRepository<Product> ProductRepository { get; }
     }
 }

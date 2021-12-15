@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using DAL.Models;
 
 namespace DAL.Repositories
 {
     public interface IRepository<TEntity> 
-        where TEntity : class
+        where TEntity : BaseEntity, new()
     {
         TEntity GetById(int id);
 

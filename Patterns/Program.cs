@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using DAL.Models;
 using Newtonsoft.Json;
 using Patterns.Builders;
 using Patterns.Factories;
+using Patterns.Services;
 
 namespace Patterns
 {
@@ -20,10 +19,18 @@ namespace Patterns
                 ReferenceLoopHandling = ReferenceLoopHandling.Ignore
             };
 
-            var factory = new RepositoryFactory();
+            var service = new CommonService<Category>();
+            var category = service.Add(new Category {Name = "category name1"});
 
-            //WorkWithBrandType(factory);
-            WorkWithBrand(factory);
+            category.Name = "updated category name";
+            service.Update(category);
+
+            service.Delete(category.Id);
+
+            /*var factory = new RepositoryFactory();
+
+            WorkWithBrandType(factory);
+            WorkWithBrand(factory);*/
 
 
         }
@@ -62,15 +69,18 @@ namespace Patterns
             Console.WriteLine("All entities after delete");
             Console.WriteLine(JsonConvert.SerializeObject(brandTypes));
 
-            var entityBeforeUpdate = brandTypeRepository.GetById(brandTypes[1].Id);
-            Console.WriteLine("Entity before update");
-            Console.WriteLine(JsonConvert.SerializeObject(entityBeforeUpdate));
+            if (brandTypes.Any())
+            {
+                var entityBeforeUpdate = brandTypeRepository.GetById(brandTypes.First().Id);
+                Console.WriteLine("Entity before update");
+                Console.WriteLine(JsonConvert.SerializeObject(entityBeforeUpdate));
 
-            entityBeforeUpdate.Name = "updated brand type";
-            brandTypeRepository.Update(entityBeforeUpdate);
-            var entityAfterUpdate = brandTypeRepository.GetById(entityBeforeUpdate.Id);
-            Console.WriteLine("Entity after update");
-            Console.WriteLine(JsonConvert.SerializeObject(entityAfterUpdate));
+                entityBeforeUpdate.Name = "updated brand type";
+                brandTypeRepository.Update(entityBeforeUpdate);
+                var entityAfterUpdate = brandTypeRepository.GetById(entityBeforeUpdate.Id);
+                Console.WriteLine("Entity after update");
+                Console.WriteLine(JsonConvert.SerializeObject(entityAfterUpdate));
+            }
         }
 
         private static void Print<T>(T input)

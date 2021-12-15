@@ -2,10 +2,8 @@
 
 namespace DAL.Models
 {
-    public class BrandType
+    public class BrandType : BaseEntity
     {
-        public int Id { get; set; }
-
         public string Name { get; set; }
 
         public IList<Brand> Brands { get; set; }
