@@ -12,5 +12,9 @@ namespace Patterns.Factories
         IRepository<Category> CategoryRepository { get; }
 
         IRepository<Product> ProductRepository { get; }
+
+        IRepository<Role> RoleRepository { get; }
+
+        IRepository<User> UserRepository { get; }
     }
 }

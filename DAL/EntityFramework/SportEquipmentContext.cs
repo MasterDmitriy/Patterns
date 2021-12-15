@@ -9,6 +9,13 @@ namespace DAL.EntityFramework
         public DbSet<Brand> Brands { set; get; }
         public DbSet<BrandType> BrandTypes { set; get; }
         public DbSet<Category> Categories { set; get; }
+        public DbSet<User> Users { set; get; }
+        public DbSet<Role> Roles { set; get; }
+
+        public SportEquipmentContext()
+        {
+            
+        }
 
         public SportEquipmentContext(DbContextOptions<SportEquipmentContext> options)
             : base(options)

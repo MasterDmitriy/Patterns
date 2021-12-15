@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using Patterns.Builders;
 using Patterns.Factories;
 using Patterns.Memento;
+using Patterns.Proxy;
 using Patterns.Services;
 
 namespace Patterns
@@ -21,6 +22,11 @@ namespace Patterns
             };
 
             var factory = new RepositoryFactory();
+
+            var proxyRepository = new ProxyRepository<Category>(factory.CategoryRepository, new AuthenticationService());
+            proxyRepository.Add(new CategoryBuilder().AddName("[proxy] category name").Build());
+
+            /*var factory = new RepositoryFactory();
             var categoryRepository = factory.CategoryRepository;
             var memento = categoryRepository.GetById(2);
             var originator = new Originator(memento);
@@ -32,7 +38,7 @@ namespace Patterns
 
             originator.Update("[memento] updated category name 12");
             caretaker.Undo();
-            caretaker.Undo();
+            caretaker.Undo();*/
 
             /*var service = new CommonService<Category>();
             var category = service.Add(new Category {Name = "category name1"});

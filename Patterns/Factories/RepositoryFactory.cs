@@ -12,5 +12,9 @@ namespace Patterns.Factories
         public IRepository<Category> CategoryRepository => new CommonRepository<Category>();
 
         public IRepository<Product> ProductRepository => new CommonRepository<Product>();
+
+        public IRepository<Role> RoleRepository => new CommonRepository<Role>();
+
+        public IRepository<User> UserRepository => new CommonRepository<User>();
     }
 }
