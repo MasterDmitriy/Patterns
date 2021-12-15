@@ -12,7 +12,7 @@ namespace DAL.EntityFramework
             var optionsBuilder = new DbContextOptionsBuilder<SportEquipmentContext>();
 
             DbContextOptions = optionsBuilder.UseMySql(
-                "server=127.0.0.1;user=root;password=Killer916$;database=sportDb;")
+                "server=127.0.0.1;user=root;password=RzbdWdd8m6;database=sportDb;")
                 .Options;
         }
 
